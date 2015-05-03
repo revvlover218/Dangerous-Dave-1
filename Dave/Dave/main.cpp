@@ -6,7 +6,7 @@
 
 //GLOBAL VARIABLES
 const int WIDTH = 1200;
-const int HEIGHT = 700;
+const int HEIGHT = 650;
 
 
 
@@ -17,6 +17,7 @@ int main(void)
 
 	//object variables
 	Dave man;
+	TextAppearance topbottomfont;
 
 	//Allegro variables
 	ALLEGRO_DISPLAY *display = NULL;
@@ -35,15 +36,13 @@ int main(void)
 	al_init_ttf_addon();
 	
 	//Pointers
-	ALLEGRO_FONT *font24 = al_load_font("BAUHS93.TTF", 24, 0);
+	
 	
 	//Clear screen to a black
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 
-	al_draw_text(font24, al_map_rgb(0, 255, 0), 10, 5, 0, "Score:" );
-	al_flip_display();
+	topbottomfont.displayFont(WIDTH);
 
-	al_rest(5.0);
 
 	man.InitDave(man);
 

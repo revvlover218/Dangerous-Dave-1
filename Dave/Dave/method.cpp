@@ -1,11 +1,13 @@
-#include "object.h"
 #include <allegro5\allegro.h>
 #include <allegro5\allegro_primitives.h>
+#include "object.h"
+#include <allegro5\allegro_font.h>
+#include <allegro5\allegro_ttf.h>
 
 void Dave::InitDave(Dave &man)
 {
 	man.x = 50;
-	man.y = 720;
+	man.y = 600;
 	man.ID = PLAYER;
 	man.boundy = 7;
 	man.lives = 3;
@@ -25,3 +27,15 @@ void Dave::DrawDave(Dave &man)
 
 }
 
+void TextAppearance::displayFont(const int &WIDTH)
+{
+	ALLEGRO_FONT *font24 = al_load_font("BAUHS93.TTF", 24, 0);
+	al_draw_text(font24, al_map_rgb(0, 255, 0), 10, 5, 0, "Score:");
+	al_draw_text(font24, al_map_rgb(0, 255, 0), 410, 5, 0, "Level ");
+	al_draw_text(font24, al_map_rgb(0, 255, 0), 810, 5, 0, "Daves:");
+	al_draw_text(font24, al_map_rgb(0, 255, 0), 10, 550, 0, "JetPack");
+	al_draw_text(font24, al_map_rgb(0, 255, 0), 810, 550, 0, "Gun");
+	al_draw_text(font24, al_map_rgb(0, 255, 0), WIDTH / 2, 600, ALLEGRO_ALIGN_CENTER, "!!Go Thru The Door!!");
+	al_flip_display();
+	al_rest(5.0);
+}

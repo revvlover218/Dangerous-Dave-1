@@ -20,3 +20,12 @@ public:
 	void DrawDave(Dave &man);
 };
 
+class TextAppearance
+{
+public:
+
+	void displayFont(const int&);
+
+
+
+};
