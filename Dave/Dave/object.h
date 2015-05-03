@@ -2,8 +2,9 @@
 enum IDS{ PLAYER, BULLET, ENEMY };
 
 //Our Player
-struct Dave
+class Dave
 {
+private:
 	int ID;
 	int x;
 	int y;
@@ -11,4 +12,11 @@ struct Dave
 	int boundx;
 	int boundy;
 	int score;
+	
+public:
+
+	//prototypes
+	void InitDave(Dave &man);
+	void DrawDave(Dave &man);
 };
+
