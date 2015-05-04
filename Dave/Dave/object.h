@@ -1,6 +1,9 @@
 //Object IDs
 enum IDS{ PLAYER, BULLET, ENEMY };
 
+//Key ID
+enum KEYS{ UP, DOWN, LEFT, RIGHT };
+
 //Our Player
 class Dave
 {

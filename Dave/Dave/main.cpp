@@ -14,11 +14,16 @@ int main(void)
 {
 	//primitive variable
 	bool done = false;
+	bool keys[4] = { false, false, false, false };
+
+
 
 	//object variables
 	Dave man;
 	TextAppearance topbottomfont;
 	Walls wall;
+
+
 
 	//Allegro variables
 	ALLEGRO_DISPLAY *display = NULL;
@@ -41,7 +46,7 @@ int main(void)
 
 	event_queue = al_create_event_queue();
 	al_register_event_source(event_queue, al_get_keyboard_event_source());
-	
+	al_register_event_source(event_queue, al_get_display_event_source(display));
 	//Pointers
 	
 	
@@ -57,25 +62,64 @@ int main(void)
 	{
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
-		if (ev.type == ALLEGRO_EVENT_KEY_DOWN)
+		if (ev.type == ALLEGRO_EVENT_KEY_DOWN) //checks to see if a key is pressed
 		{
 			switch (ev.keyboard.keycode)
 			{
+
 			case ALLEGRO_KEY_UP:
-				man.MoveDave(10, 0, 0, 0, man); //UP, DOWN, LEFT, RIGHT
+				keys[UP] = true;
 				break;
 			case ALLEGRO_KEY_DOWN:
-				man.MoveDave(0, 10, 0, 0, man); //UP, DOWN, LEFT, RIGHT
-				break;
-			case ALLEGRO_KEY_LEFT:
-				man.MoveDave(0, 0, 10, 0, man); //UP, DOWN, LEFT, RIGHT
+				keys[DOWN] = true;
 				break;
 			case ALLEGRO_KEY_RIGHT:
-				man.MoveDave(0, 0, 0, 10, man); //UP, DOWN, LEFT, RIGHT
+				keys[RIGHT] = true;
 				break;
+			case ALLEGRO_KEY_LEFT:
+				keys[LEFT] = true;
+				break;
+
 			}
 
 		}
+
+		else if (ev.type == ALLEGRO_EVENT_KEY_UP) //checks to see if a key is released
+		{
+
+			switch (ev.keyboard.keycode)
+			{
+			
+			case ALLEGRO_KEY_UP:
+				keys[UP] = false;
+				break;
+			case ALLEGRO_KEY_DOWN:
+				keys[DOWN] = false;
+				break;
+			case ALLEGRO_KEY_RIGHT:
+				keys[RIGHT] = false;
+				break;
+			case ALLEGRO_KEY_LEFT:
+				keys[LEFT] = false;
+				break;
+			case ALLEGRO_KEY_ESCAPE:
+				done = true;
+				break;
+			}
+		}
+		else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+		{
+			done = true;
+		}
+
+		if (keys[UP] == true)
+			man.MoveDave(10, 0, 0, 0, man); //UP, DOWN, LEFT, RIGHT
+		if (keys[DOWN] == true)
+			man.MoveDave(0, 10, 0, 0, man); //UP, DOWN, LEFT, RIGHT
+			if (keys[LEFT] == true)
+				man.MoveDave(0, 0, 10, 0, man); //UP, DOWN, LEFT, RIGHT
+				if (keys[RIGHT] == true)
+					man.MoveDave(0, 0, 0, 10, man); //UP, DOWN, LEFT, RIGHT
 
 		man.DrawDave(man);
 		al_flip_display();
@@ -85,7 +129,7 @@ int main(void)
 
 
 	//Destroying
-
+	al_destroy_event_queue(event_queue);
 	al_destroy_display(display);						//destroy our display object
 
 	return 0;
