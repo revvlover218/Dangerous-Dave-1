@@ -18,6 +18,7 @@ public:
 	//prototypes
 	void InitDave(Dave &man);
 	void DrawDave(Dave &man);
+	void MoveDave(int, int, int, int, Dave &man);
 };
 
 class TextAppearance		//Display Top and Bottom Text

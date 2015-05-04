@@ -27,6 +27,15 @@ void Dave::DrawDave(Dave &man)
 
 }
 
+
+void Dave::MoveDave(int up, int down, int left, int right, Dave &man)
+{
+	man.x -= left;
+	man.x += right;
+	man.y -= up;
+	man.y += down;
+}
+
 void TextAppearance::displayFont(const int &WIDTH, const int &HEIGHT) //Display Top and Bottom Text
 {
 	ALLEGRO_FONT *font24 = al_load_font("BAUHS93.TTF", 24, 0);
@@ -44,7 +53,7 @@ void Walls::topBottom(const int &WIDTH, const int &HEIGHT)
 
 	al_draw_filled_rectangle(10, 30, 1000, 75, al_map_rgb(255, 0, 0));	//Top wall (x, y, length, height, colour)
 	//al_draw_filled_rectangle(10, 50, 1000, 100, al_map_rgb(255, 0, 0));
-	al_draw_filled_rectangle(10, HEIGHT - 120, 1000, 500, al_map_rgb(255, 0, 255)); //Bottom Wall
+	//al_draw_filled_rectangle(10, HEIGHT - 120, 1000, 500, al_map_rgb(255, 0, 255)); //Bottom Wall
 	//al_draw_filled_rectangle(10, HEIGHT - 110, 1000, 100, al_map_rgb(255, 0, 0));
 	al_flip_display();
 	al_rest(5.0);
