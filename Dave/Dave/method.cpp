@@ -4,6 +4,9 @@
 #include <allegro5\allegro_font.h>
 #include <allegro5\allegro_ttf.h>
 
+
+
+
 void Dave::InitDave(Dave &man)
 {
 	man.x = 50;
@@ -20,6 +23,7 @@ void Dave::InitDave(Dave &man)
 
 void Dave::DrawDave(Dave &man)
 {
+
 	al_draw_filled_rectangle(man.x, man.y - 90, man.x + 20, man.y - 70, al_map_rgb(0, 0, 255));
 	al_draw_filled_rectangle(man.x - 10, man.y - 70, man.x + 30, man.y - 50, al_map_rgb(0, 0, 255));
 	al_draw_filled_rectangle(man.x, man.y - 50, man.x + 5, man.y - 20, al_map_rgb(0, 0, 255));
@@ -30,14 +34,16 @@ void Dave::DrawDave(Dave &man)
 
 void Dave::MoveDave(int up, int down, int left, int right, Dave &man)
 {
+	
 	man.x -= left;
 	man.x += right;
 	man.y -= up;
 	man.y += down;
 }
 
-void TextAppearance::displayFont(const int &WIDTH, const int &HEIGHT) //Display Top and Bottom Text
+void Level::displayFont(const int &WIDTH, const int &HEIGHT) //Display Top and Bottom Text
 {
+	
 	ALLEGRO_FONT *font24 = al_load_font("BAUHS93.TTF", 24, 0);
 	al_draw_text(font24, al_map_rgb(0, 255, 0), 10, 5, 0, "Score:");
 	al_draw_text(font24, al_map_rgb(0, 255, 0), 410, 5, 0, "Level ");
@@ -48,7 +54,7 @@ void TextAppearance::displayFont(const int &WIDTH, const int &HEIGHT) //Display 
 	al_flip_display();
 }
 
-void Walls::topBottom(const int &WIDTH, const int &HEIGHT)
+void Level::walls(const int &WIDTH, const int &HEIGHT)
 {
 
 	al_draw_filled_rectangle(10, 30, 1000, 75, al_map_rgb(255, 0, 0));	//Top wall (x, y, length, height, colour)

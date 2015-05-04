@@ -7,6 +7,7 @@ enum KEYS{ UP, DOWN, LEFT, RIGHT };
 //Our Player
 class Dave
 {
+
 private:
 	int ID;
 	int x;
@@ -17,26 +18,19 @@ private:
 	int score;
 	
 public:
-
 	//prototypes
 	void InitDave(Dave &man);
 	void DrawDave(Dave &man);
 	void MoveDave(int, int, int, int, Dave &man);
 };
 
-class TextAppearance		//Display Top and Bottom Text
+class Level
 {
+
 public:
+	void displayFont(const int&, const int&); //display font at the top and bottom of the screen
+	void walls(const int&, const int&); //display the walls of the screen
 
-	void displayFont(const int&, const int&);
-private:
 
-};
-
-class Walls
-{
-public:
-
-	void topBottom(const int&, const int&);
 
 };

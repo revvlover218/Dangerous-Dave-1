@@ -8,10 +8,9 @@
 const int WIDTH = 1200;
 const int HEIGHT = 700;
 
-
-
 int main(void)
 {
+
 	//primitive variable
 	bool done = false;
 	bool keys[4] = { false, false, false, false };
@@ -20,14 +19,15 @@ int main(void)
 
 	//object variables
 	Dave man;
-	TextAppearance topbottomfont;
-	Walls wall;
+	Level lvl; // text on top and bottom of screen 
 
 
 
 	//Allegro variables
 	ALLEGRO_DISPLAY *display = NULL;
 	ALLEGRO_EVENT_QUEUE *event_queue = NULL;
+
+
 
 	//Initialization Functions
 	if (!al_init())										//initialize Allegro
@@ -47,23 +47,38 @@ int main(void)
 	event_queue = al_create_event_queue();
 	al_register_event_source(event_queue, al_get_keyboard_event_source());
 	al_register_event_source(event_queue, al_get_display_event_source(display));
+	
+	
+	
 	//Pointers
 	
 	
-	//Clear screen to a black
-	al_clear_to_color(al_map_rgb(0, 0, 0));
 
-	topbottomfont.displayFont(WIDTH, HEIGHT);
-	wall.topBottom(WIDTH, HEIGHT);
+	
+	al_clear_to_color(al_map_rgb(0, 0, 0)); //Clear screen to a black
+
+
+
+
+	lvl.displayFont(WIDTH, HEIGHT);
+	lvl.walls(WIDTH, HEIGHT);
+
+
+
 
 	man.InitDave(man);
 
+
+
 	while (!done)
 	{
+
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
+		
 		if (ev.type == ALLEGRO_EVENT_KEY_DOWN) //checks to see if a key is pressed
 		{
+
 			switch (ev.keyboard.keycode)
 			{
 
@@ -79,7 +94,6 @@ int main(void)
 			case ALLEGRO_KEY_LEFT:
 				keys[LEFT] = true;
 				break;
-
 			}
 
 		}
@@ -112,20 +126,16 @@ int main(void)
 			done = true;
 		}
 
-		if (keys[UP] == true)
-			man.MoveDave(10, 0, 0, 0, man); //UP, DOWN, LEFT, RIGHT
-		if (keys[DOWN] == true)
-			man.MoveDave(0, 10, 0, 0, man); //UP, DOWN, LEFT, RIGHT
-			if (keys[LEFT] == true)
-				man.MoveDave(0, 0, 10, 0, man); //UP, DOWN, LEFT, RIGHT
-				if (keys[RIGHT] == true)
-					man.MoveDave(0, 0, 0, 10, man); //UP, DOWN, LEFT, RIGHT
+		if (keys[UP] == true) man.MoveDave(10, 0, 0, 0, man); //UP
+		if (keys[DOWN] == true) man.MoveDave(0, 10, 0, 0, man); //DOWN
+		if (keys[LEFT] == true) man.MoveDave(0, 0, 10, 0, man); //LEFT
+		if (keys[RIGHT] == true) man.MoveDave(0, 0, 0, 10, man); //RIGHT
 
 		man.DrawDave(man);
 		al_flip_display();
 		al_clear_to_color(al_map_rgb(0, 0, 0));
-
 	}
+
 
 
 	//Destroying
