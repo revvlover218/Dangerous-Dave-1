@@ -4,9 +4,6 @@
 #include <allegro5\allegro_font.h>
 #include <allegro5\allegro_ttf.h>
 
-
-
-
 void Dave::InitDave(Dave &man)
 {
 	man.x = 50;

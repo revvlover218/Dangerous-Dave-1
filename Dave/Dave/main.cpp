@@ -19,6 +19,7 @@ int main(void)
 	bool redraw = true;
 
 
+
 	//object variables
 	Dave man;
 	Level lvl; // text on top and bottom of screen 
@@ -29,6 +30,7 @@ int main(void)
 	ALLEGRO_DISPLAY *display = NULL;
 	ALLEGRO_EVENT_QUEUE *event_queue = NULL;
 	ALLEGRO_TIMER *timer = NULL;
+
 
 
 	//Initialization Functions
@@ -103,7 +105,6 @@ int main(void)
 				keys[LEFT] = true;
 				break;
 			}
-
 		}
 
 		else if (ev.type == ALLEGRO_EVENT_KEY_UP) //checks to see if a key is released
@@ -165,4 +166,3 @@ int main(void)
 
 	return 0;
 }
-
