@@ -7,14 +7,16 @@
 //GLOBAL VARIABLES
 const int WIDTH = 1200;
 const int HEIGHT = 700;
+const int FPS = 60;
 
 int main(void)
 {
 
 	//primitive variable
+	int countFPS = 0;
 	bool done = false;
 	bool keys[4] = { false, false, false, false };
-
+	bool redraw = true;
 
 
 	//object variables
@@ -26,7 +28,7 @@ int main(void)
 	//Allegro variables
 	ALLEGRO_DISPLAY *display = NULL;
 	ALLEGRO_EVENT_QUEUE *event_queue = NULL;
-
+	ALLEGRO_TIMER *timer = NULL;
 
 
 	//Initialization Functions
@@ -43,8 +45,12 @@ int main(void)
 	al_init_font_addon();
 	al_init_ttf_addon();
 	al_install_keyboard();
-
+   
+	timer = al_create_timer(1.0 / FPS);
 	event_queue = al_create_event_queue();
+	
+	//Register/ Load sources to event queue 
+	al_register_event_source(event_queue, al_get_timer_event_source(timer));
 	al_register_event_source(event_queue, al_get_keyboard_event_source());
 	al_register_event_source(event_queue, al_get_display_event_source(display));
 	
@@ -60,7 +66,7 @@ int main(void)
 
 
 
-	lvl.displayFont(WIDTH, HEIGHT);
+	lvl.displayFont(WIDTH, HEIGHT, countFPS);
 	lvl.walls(WIDTH, HEIGHT);
 
 
@@ -69,12 +75,14 @@ int main(void)
 	man.InitDave(man);
 
 
-
+	al_start_timer(timer);
 	while (!done)
 	{
 
 		ALLEGRO_EVENT ev;
 		al_wait_for_event(event_queue, &ev);
+
+		countFPS++;
 		
 		if (ev.type == ALLEGRO_EVENT_KEY_DOWN) //checks to see if a key is pressed
 		{
@@ -121,19 +129,32 @@ int main(void)
 				break;
 			}
 		}
+		
 		else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
 		{
 			done = true;
 		}
 
-		if (keys[UP] == true) man.MoveDave(10, 0, 0, 0, man); //UP
-		if (keys[DOWN] == true) man.MoveDave(0, 10, 0, 0, man); //DOWN
-		if (keys[LEFT] == true) man.MoveDave(0, 0, 10, 0, man); //LEFT
-		if (keys[RIGHT] == true) man.MoveDave(0, 0, 0, 10, man); //RIGHT
+		else if (ev.type == ALLEGRO_EVENT_TIMER)
+		{
+	    
+			if (keys[UP] == true) man.MoveDave(10, 0, 0, 0, man); //UP
+			if (keys[DOWN] == true) man.MoveDave(0, 10, 0, 0, man); //DOWN
+			if (keys[LEFT] == true) man.MoveDave(0, 0, 10, 0, man); //LEFT
+			if (keys[RIGHT] == true) man.MoveDave(0, 0, 0, 10, man); //RIGHT
+	
+			redraw = true;
+		}
+	
+		if (redraw && al_is_event_queue_empty(event_queue))
+		{
 
-		man.DrawDave(man);
-		al_flip_display();
-		al_clear_to_color(al_map_rgb(0, 0, 0));
+			redraw - false;
+	        man.DrawDave(man);
+			al_flip_display();
+			al_clear_to_color(al_map_rgb(0, 0, 0));
+		}
+	
 	}
 
 

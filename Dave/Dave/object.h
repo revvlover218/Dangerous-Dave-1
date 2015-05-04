@@ -28,7 +28,7 @@ class Level
 {
 
 public:
-	void displayFont(const int&, const int&); //display font at the top and bottom of the screen
+	void displayFont(const int&, const int&, int&); //display font at the top and bottom of the screen
 	void walls(const int&, const int&); //display the walls of the screen
 
 
