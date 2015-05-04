@@ -20,12 +20,19 @@ public:
 	void DrawDave(Dave &man);
 };
 
-class TextAppearance
+class TextAppearance		//Display Top and Bottom Text
 {
 public:
 
-	void displayFont(const int&);
+	void displayFont(const int&, const int&);
+private:
 
+};
 
+class Walls
+{
+public:
+
+	void topBottom(const int&, const int&);
 
 };

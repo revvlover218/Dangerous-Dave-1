@@ -18,6 +18,7 @@ int main(void)
 	//object variables
 	Dave man;
 	TextAppearance topbottomfont;
+	Walls wall;
 
 	//Allegro variables
 	ALLEGRO_DISPLAY *display = NULL;
@@ -30,6 +31,7 @@ int main(void)
 
 	if (!display)										//test display object
 		return -1;
+	
 	//Initialization
 	al_init_primitives_addon();
 	al_init_font_addon();
@@ -41,8 +43,8 @@ int main(void)
 	//Clear screen to a black
 	al_clear_to_color(al_map_rgb(0, 0, 0));
 
-	topbottomfont.displayFont(WIDTH);
-
+	topbottomfont.displayFont(WIDTH, HEIGHT);
+	wall.topBottom(WIDTH, HEIGHT);
 
 	man.InitDave(man);
 
